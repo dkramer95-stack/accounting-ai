@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accounting AI — Automate Your Books</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <div class="logo">⚡ AccountingAI</div>
+      <div class="nav-links">
+        <a href="#skills">Skills</a>
+        <a href="#how">How it works</a>
+        <a href="#bulk">Bulk upload</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#try" class="btn-nav">Try free →</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">Powered by Claude AI</div>
+    <h1>Your accounting,<br /><span class="gradient">done in seconds.</span></h1>
+    <p class="hero-sub">Paste a receipt. Drop a bank statement. Upload invoices. AI handles the rest — categorized, reconciled, and ready to report.</p>
+    <div class="hero-cta">
+      <a href="#try" class="btn-primary">Start for free</a>
+      <a href="#skills" class="btn-ghost">See what it does ↓</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">5</span><span class="stat-label">Accounting skills</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">~3s</span><span class="stat-label">Per document</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Structured output</span></div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="skills" id="skills">
+    <div class="section-label">What it can do</div>
+    <h2>Five skills. Zero manual work.</h2>
+    <p class="section-sub">Each skill handles a real accounting task — just paste or upload your document and get structured output instantly.</p>
+
+    <div class="skills-grid">
+
+      <div class="skill-card" data-skill="receipt">
+        <div class="skill-icon">🧾</div>
+        <h3>Receipt Processing</h3>
+        <p>Extract vendor, date, amount, tax, and category from any receipt — image, PDF, or pasted text.</p>
+        <div class="skill-output">
+          <div class="output-label">Output</div>
+          <pre>{
+  "vendor": "Staples",
+  "date": "2026-03-14",
+  "amount": 84.32,
+  "tax": 7.18,
+  "category": "Office Supplies"
+}</pre>
+        </div>
+      </div>
+
+      <div class="skill-card" data-skill="categorize">
+        <div class="skill-icon">🏷️</div>
+        <h3>Expense Categorization</h3>
+        <p>Paste a CSV of transactions. Every line gets classified into a standard accounting category automatically.</p>
+        <div class="skill-output">
+          <div class="output-label">Output</div>
+          <pre>Uber Eats → Meals & Entertainment
+Delta Airlines → Travel
+Zoom Pro → Software & Subscriptions
+WeWork → Rent & Facilities</pre>
+        </div>
+      </div>
+
+      <div class="skill-card" data-skill="invoice">
+        <div class="skill-icon">📄</div>
+        <h3>Invoice Management</h3>
+        <p>Upload an invoice and get every field extracted — line items, totals, due dates, and overdue flags.</p>
+        <div class="skill-output">
+          <div class="output-label">Output</div>
+          <pre>{
+  "invoice_no": "INV-2291",
+  "due": "2026-04-01",
+  "total": 4200.00,
+  "status": "OVERDUE"
+}</pre>
+        </div>
+      </div>
+
+      <div class="skill-card" data-skill="reconcile">
+        <div class="skill-icon">⚖️</div>
+        <h3>Bank Reconciliation</h3>
+        <p>Drop in your bank statement and bookkeeping records. AI matches every transaction and flags gaps.</p>
+        <div class="skill-output">
+          <div class="output-label">Output</div>
+          <pre>✅ 47 matched
+⚠️  3 unmatched
+❌  1 duplicate found
+Net difference: $0.00</pre>
+        </div>
+      </div>
+
+      <div class="skill-card" data-skill="report">
+        <div class="skill-icon">📊</div>
+        <h3>Monthly Reporting</h3>
+        <p>Feed in raw transactions and get a full P&amp;L — revenue, expenses by category, net income, and trends.</p>
+        <div class="skill-output">
+          <div class="output-label">Output</div>
+          <pre>Revenue:   $38,400
+Expenses:  $21,850
+Net:       $16,550
+MoM:       ▲ 12.4%</pre>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="section-label">How it works</div>
+    <h2>Three steps to clean books.</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Paste or upload</h3>
+        <p>Drop in a receipt, bank statement, invoice, or transaction CSV. Any format works.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>AI processes it</h3>
+        <p>Claude reads every field, categorizes, matches, and flags anything that needs attention.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Get structured output</h3>
+        <p>Clean JSON, CSV, or a readable report — ready to paste into QuickBooks, Xero, or your workflow.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRY IT -->
+  <section class="try-it" id="try">
+    <div class="try-card">
+      <h2>Try it now</h2>
+      <p>Paste any accounting document below and pick a skill.</p>
+      <div class="try-row">
+        <select id="skill-select">
+          <option value="receipt">🧾 Receipt Processing</option>
+          <option value="categorize">🏷️ Expense Categorization</option>
+          <option value="invoice">📄 Invoice Management</option>
+          <option value="reconcile">⚖️ Bank Reconciliation</option>
+          <option value="report">📊 Monthly Reporting</option>
+        </select>
+        <button class="btn-primary" id="run-btn">Run skill →</button>
+      </div>
+      <textarea id="doc-input" placeholder="Paste your receipt, invoice, transactions, or bank statement here..."></textarea>
+      <div class="try-output" id="try-output">
+        <div class="output-header">
+          <div class="output-label">Output will appear here</div>
+          <button class="btn-export" id="export-btn" disabled>⬇ Export to Excel</button>
+        </div>
+        <pre id="output-pre">// Waiting for input...</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- BULK UPLOAD -->
+  <section class="bulk" id="bulk">
+    <div class="section-label">Bulk Processing</div>
+    <h2>Process dozens of files at once.</h2>
+    <p class="section-sub">Drop all your Excel, CSV, or PDF files in one go. AI assigns the right skill to each one automatically.</p>
+
+    <div class="bulk-card">
+
+      <!-- Drop Zone -->
+      <div class="drop-zone" id="drop-zone">
+        <input type="file" id="file-input" multiple accept=".xlsx,.xls,.csv,.pdf,.txt" hidden />
+        <div class="drop-icon">📂</div>
+        <p class="drop-title">Drop your files here</p>
+        <p class="drop-sub">Excel, CSV, PDF — any format. Up to 50 files at once.</p>
+        <button class="btn-ghost" id="browse-btn">Browse files</button>
+      </div>
+
+      <!-- File Queue -->
+      <div class="file-queue" id="file-queue" style="display:none">
+        <div class="queue-header">
+          <div class="queue-meta" id="queue-meta">0 files selected</div>
+          <div class="queue-actions">
+            <button class="btn-ghost btn-sm" id="clear-btn">Clear all</button>
+            <button class="btn-primary btn-sm" id="process-all-btn">⚡ Process all</button>
+          </div>
+        </div>
+        <div class="file-list" id="file-list"></div>
+      </div>
+
+      <!-- Results -->
+      <div class="bulk-results" id="bulk-results" style="display:none">
+        <div class="results-header">
+          <div class="results-title" id="results-title">Results</div>
+          <button class="btn-export ready" id="export-all-btn">⬇ Export all to Excel</button>
+        </div>
+        <div class="results-list" id="results-list"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="section-label">Pricing</div>
+    <h2>Simple, honest pricing.</h2>
+
+    <div class="plans">
+      <div class="plan">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">$0<span>/mo</span></div>
+        <ul>
+          <li>✓ 50 documents/month</li>
+          <li>✓ All 5 skills</li>
+          <li>✓ JSON output</li>
+          <li>✗ CSV export</li>
+          <li>✗ API access</li>
+        </ul>
+        <a href="#" class="btn-plan">Get started free</a>
+      </div>
+      <div class="plan plan-featured">
+        <div class="plan-badge">Most popular</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">$49<span>/mo</span></div>
+        <ul>
+          <li>✓ Unlimited documents</li>
+          <li>✓ All 5 skills</li>
+          <li>✓ JSON + CSV export</li>
+          <li>✓ API access</li>
+          <li>✓ Priority support</li>
+        </ul>
+        <a href="#" class="btn-plan btn-plan-featured">Start Pro trial</a>
+      </div>
+      <div class="plan">
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-price">$199<span>/mo</span></div>
+        <ul>
+          <li>✓ Everything in Pro</li>
+          <li>✓ Custom skill training</li>
+          <li>✓ QuickBooks integration</li>
+          <li>✓ Xero integration</li>
+          <li>✓ Dedicated support</li>
+        </ul>
+        <a href="#" class="btn-plan">Contact sales</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="logo">⚡ AccountingAI</div>
+      <p>Built with Claude AI. Automate your books, not your life.</p>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">API docs</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AccountingAI — Live Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #06060a;
+      --card: #0f0f13;
+      --border: #1e1e24;
+      --text: #f4f4f5;
+      --muted: #52525b;
+      --accent: #6366f1;
+      --accent2: #8b5cf6;
+      --green: #22c55e;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+
+    /* GRID BG */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: linear-gradient(rgba(99,102,241,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 56px;
+      background: rgba(6,6,10,0.8);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-weight: 700; font-size: 1rem; letter-spacing: -0.02em; }
+    .nav-right { display: flex; gap: 12px; align-items: center; }
+    .btn { padding: 7px 18px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none; font-family: inherit; transition: opacity 0.15s, transform 0.1s; border: none; display: inline-block; }
+    .btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+    .btn-accent { background: var(--accent); color: #fff; }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 130px 24px 60px;
+      text-align: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(99,102,241,0.1);
+      border: 1px solid rgba(99,102,241,0.25);
+      color: #a5b4fc;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      letter-spacing: 0.02em;
+    }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .hero h1 { font-size: clamp(2.6rem, 6vw, 4.2rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; margin-bottom: 20px; }
+    .grad { background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { color: var(--muted); font-size: 1.1rem; max-width: 560px; margin: 0 auto 40px; line-height: 1.75; }
+    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .hint { font-size: 0.78rem; color: var(--muted); }
+
+    /* BROWSER MOCKUP */
+    .mockup-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto 100px;
+      padding: 0 24px;
+    }
+    .mockup-glow {
+      position: absolute;
+      inset: -60px;
+      background: radial-gradient(ellipse at 50% 40%, rgba(99,102,241,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .browser {
+      background: #131318;
+      border: 1px solid #2a2a35;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+      position: relative;
+    }
+    .browser-bar {
+      background: #1a1a22;
+      border-bottom: 1px solid #2a2a35;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .browser-dots { display: flex; gap: 6px; }
+    .browser-dots span { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-red { background: #ff5f57; }
+    .dot-yellow { background: #febc2e; }
+    .dot-green { background: #28c840; }
+    .browser-url {
+      flex: 1;
+      background: #0f0f14;
+      border: 1px solid #2a2a35;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-family: 'SF Mono', monospace;
+    }
+    .browser-body { position: relative; }
+    .browser-body iframe {
+      width: 100%;
+      height: 580px;
+      border: none;
+      display: block;
+    }
+    .browser-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, #131318 100%);
+      pointer-events: none;
+    }
+
+    /* FEATURES */
+    .features {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+    }
+    .features-label { text-align: center; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .features h2 { text-align: center; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 48px; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .feature-card:hover { border-color: rgba(99,102,241,0.35); transform: translateY(-2px); }
+    .feature-num { font-size: 0.72rem; font-weight: 700; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 14px; }
+    .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.01em; }
+    .feature-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
+
+    /* SKILLS WALKTHROUGH */
+    .walkthrough {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+    }
+    .walkthrough-label { text-align: center; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .walkthrough h2 { text-align: center; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 48px; }
+    .skills-row { display: flex; flex-direction: column; gap: 12px; }
+    .skill-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .skill-item.active { border-color: var(--accent); }
+    .skill-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 24px;
+    }
+    .skill-emoji { font-size: 1.4rem; flex-shrink: 0; }
+    .skill-head-text h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
+    .skill-head-text p { font-size: 0.82rem; color: var(--muted); }
+    .skill-chevron { margin-left: auto; color: var(--muted); font-size: 0.75rem; transition: transform 0.2s; }
+    .skill-item.active .skill-chevron { transform: rotate(90deg); color: var(--accent); }
+    .skill-body {
+      display: none;
+      border-top: 1px solid var(--border);
+      background: #0a0a0e;
+      padding: 20px 24px;
+    }
+    .skill-item.active .skill-body { display: block; }
+    .skill-demo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .demo-col label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); display: block; margin-bottom: 8px; }
+    .demo-col pre { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.78rem; line-height: 1.65; white-space: pre-wrap; background: #0f0f14; border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+    .demo-col.input pre { color: #71717a; }
+    .demo-col.output pre { color: var(--green); }
+    @media (max-width: 600px) { .skill-demo { grid-template-columns: 1fr; } }
+
+    /* CTA */
+    .cta {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 24px 120px;
+      text-align: center;
+    }
+    .cta-card {
+      background: linear-gradient(135deg, rgba(99,102,241,0.12), rgba(139,92,246,0.08));
+      border: 1px solid rgba(99,102,241,0.25);
+      border-radius: 20px;
+      padding: 56px 40px;
+    }
+    .cta h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 14px; }
+    .cta p { color: var(--muted); font-size: 1rem; margin-bottom: 32px; line-height: 1.7; }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 32px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-logo { font-weight: 700; font-size: 0.95rem; }
+    footer p { color: var(--muted); font-size: 0.82rem; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">⚡ AccountingAI</div>
+    <div class="nav-right">
+      <a href="accounting-ai-bundle.html" target="_blank" class="btn btn-outline">View site</a>
+      <a href="accounting-ai-bundle.html" target="_blank" class="btn btn-accent">Try it free →</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow"><span class="dot"></span> Live demo — no signup needed</div>
+    <h1>Accounting automation<br /><span class="grad">that actually works.</span></h1>
+    <p>Drop a receipt, invoice, or bank statement. AI reads it, categorizes it, and hands back clean structured output in seconds.</p>
+    <div class="hero-btns">
+      <a href="accounting-ai-bundle.html" target="_blank" class="btn btn-accent">Open live site →</a>
+      <a href="#walkthrough" class="btn btn-outline">See how it works ↓</a>
+    </div>
+    <p class="hint">Built with Claude AI · Exports to Excel · Bulk processing</p>
+  </div>
+
+  <!-- BROWSER MOCKUP -->
+  <div class="mockup-wrap">
+    <div class="mockup-glow"></div>
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots">
+          <span class="dot-red"></span>
+          <span class="dot-yellow"></span>
+          <span class="dot-green"></span>
+        </div>
+        <div class="browser-url">accountingai.app</div>
+      </div>
+      <div class="browser-body">
+        <iframe src="accounting-ai-bundle.html" title="AccountingAI live preview"></iframe>
+        <div class="browser-overlay"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="features">
+    <div class="features-label">Why it's different</div>
+    <h2>Built for how accountants actually work.</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-num">01</div>
+        <h3>Any format, zero prep</h3>
+        <p>Paste text, drop a PDF, or upload an Excel file. No templates, no field mapping — AI figures it out.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">02</div>
+        <h3>Clean, readable output</h3>
+        <p>No raw JSON dumps. Every result is formatted as a human-readable summary with labeled sections and aligned columns.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">03</div>
+        <h3>Bulk process 50 files</h3>
+        <p>Drop an entire month of receipts, invoices, and statements at once. AI assigns the right skill to each file automatically.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">04</div>
+        <h3>Export-ready output</h3>
+        <p>Every result downloads as a properly formatted CSV — ready to open in Excel or import into QuickBooks and Xero.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">05</div>
+        <h3>Five accounting skills</h3>
+        <p>Receipt processing, expense categorization, invoice management, bank reconciliation, and monthly reporting.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">06</div>
+        <h3>Powered by Claude AI</h3>
+        <p>Anthropic's Claude handles the reading, reasoning, and structuring — the same AI trusted by leading enterprises.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS WALKTHROUGH -->
+  <div class="walkthrough" id="walkthrough">
+    <div class="walkthrough-label">Skill walkthrough</div>
+    <h2>See each skill in action.</h2>
+    <div class="skills-row" id="skills-row"></div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div class="cta-card">
+      <h2>Ready to try it?</h2>
+      <p>Open the live site, paste any accounting document, and see structured output in under 3 seconds. No signup, no credit card.</p>
+      <div class="cta-btns">
+        <a href="accounting-ai-bundle.html" target="_blank" class="btn btn-accent">Open AccountingAI →</a>
+        <a href="accounting-ai-bundle.html#bulk" target="_blank" class="btn btn-outline">Try bulk upload</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">⚡ AccountingAI</div>
+    <p>Demo built with Claude AI · All processing happens in your browser</p>
+  </footer>
+
+  <script>
+    const skills = [
+      {
+        emoji: '🧾',
+        name: 'Receipt Processing',
+        desc: 'Extract every field from any receipt automatically.',
+        input: `Staples #0842 - Store Receipt
+Date: March 14, 2026
+---------------------------
+Printer Paper (2x)    $24.98
+Ink Cartridge (Black) $34.99
+Sticky Notes 3-pack   $12.99
+---------------------------
+Subtotal:             $72.96
+Tax (8.5%):            $6.20
+TOTAL:                $79.16
+Payment: Visa ****4821`,
+        output: `RECEIPT SUMMARY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Vendor       Staples #0842
+Date         Mar 14, 2026
+Payment      Visa ****4821
+Category     Office Supplies
+
+LINE ITEMS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Printer Paper (2x)          $24.98
+Ink Cartridge (Black)       $34.99
+Sticky Notes 3-pack         $12.99
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Subtotal                    $72.96
+Tax (8.5%)                   $6.20
+TOTAL                       $79.16`
+      },
+      {
+        emoji: '🏷️',
+        name: 'Expense Categorization',
+        desc: 'Classify every transaction into standard accounting categories.',
+        input: `Date,Merchant,Amount
+2026-03-01,Uber Eats,48.20
+2026-03-02,Delta Airlines,380.00
+2026-03-03,Zoom Pro,15.99
+2026-03-05,WeWork Monthly,800.00
+2026-03-07,Staples,79.16
+2026-03-10,AWS,142.50`,
+        output: `Date        Merchant           Amount    Category
+────────────────────────────────────────────────
+2026-03-01  Uber Eats          $48.20    Meals & Entertainment
+2026-03-02  Delta Airlines    $380.00    Travel
+2026-03-03  Zoom Pro           $15.99    Software & Subscriptions
+2026-03-05  WeWork Monthly    $800.00    Rent & Facilities
+2026-03-07  Staples            $79.16    Office Supplies
+2026-03-10  AWS               $142.50    Software & Subscriptions`
+      },
+      {
+        emoji: '📄',
+        name: 'Invoice Management',
+        desc: 'Parse invoices, flag overdue items, and extract all fields.',
+        input: `INVOICE #INV-2291
+From: Design Studio LLC
+To: Acme Corp
+Due: 2026-03-01
+
+Brand Redesign (40hrs @ $85)  $3,400.00
+Logo Files & Assets             $400.00
+Rush Fee (10%)                  $380.00
+--------------------------------------
+TOTAL DUE:                    $4,180.00`,
+        output: `INVOICE SUMMARY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Invoice #    INV-2291
+Vendor       Design Studio LLC
+Client       Acme Corp
+Due          Mar 1, 2026
+Status       ⚠️  OVERDUE — 18 days
+
+LINE ITEMS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Brand Redesign (40hrs @ $85) $3,400.00
+Logo Files & Assets            $400.00
+Rush Fee (10%)                 $380.00
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Subtotal                    $4,180.00
+Tax                             $0.00
+TOTAL DUE                   $4,180.00`
+      },
+      {
+        emoji: '⚖️',
+        name: 'Bank Reconciliation',
+        desc: 'Match bank transactions to your books and flag gaps.',
+        input: `BANK (March 2026):
+03/01 Payroll           -$12,400.00
+03/03 Client ACME        +$8,500.00
+03/05 WeWork               -$800.00
+03/09 Zoom (duplicate)      -$15.99
+03/10 AWS                  -$142.50
+
+BOOKS:
+03/01 Payroll           -$12,400.00
+03/05 WeWork Rent          -$800.00
+03/10 AWS Cloud            -$142.50`,
+        output: `RECONCILIATION SUMMARY — March 2026
+══════════════════════════════════════
+
+✅  3 transactions matched
+⚠️  1 unmatched: Client ACME +$8,500 (not in books)
+❌  1 DUPLICATE: Zoom Pro charged twice on 03/09
+
+Matched:        $-13,342.50
+Unmatched:       +$8,500.00
+Duplicate:          -$15.99
+
+Action required:
+→ Book ACME payment
+→ Dispute Zoom duplicate charge`
+      },
+      {
+        emoji: '📊',
+        name: 'Monthly Reporting',
+        desc: 'Generate a full P&L from raw transactions.',
+        input: `MARCH 2026 TRANSACTIONS
+
+REVENUE:
+Client ACME Corp      $8,500.00
+Client Bright Ideas   $6,200.00
+NorthStar LLC        $12,800.00
+Retainer - FiveOaks   $4,500.00
+
+EXPENSES:
+Payroll              $12,400.00
+WeWork Rent             $800.00
+Office Supplies          $79.16
+AWS + Zoom + Adobe      $213.48
+Travel                  $380.00
+
+FEB NET: $14,750.00`,
+        output: `MONTHLY REPORT — March 2026
+══════════════════════════════════
+
+REVENUE
+  Client ACME Corp          $8,500.00
+  Client Bright Ideas       $6,200.00
+  Client NorthStar LLC     $12,800.00
+  Retainer - FiveOaks       $4,500.00
+  ──────────────────────────────────
+  Total Revenue            $32,000.00
+
+EXPENSES
+  Payroll                  $12,400.00
+  Rent & Facilities           $800.00
+  Office Supplies              $79.16
+  Software                    $213.48
+  Travel                      $380.00
+  ──────────────────────────────────
+  Total Expenses           $13,872.64
+
+NET INCOME                 $18,127.36
+February Net               $14,750.00
+Month-over-Month            ▲ +22.9%`
+      }
+    ];
+
+    const container = document.getElementById('skills-row');
+    skills.forEach((s, i) => {
+      const el = document.createElement('div');
+      el.className = 'skill-item' + (i === 0 ? ' active' : '');
+      el.innerHTML = `
+        <div class="skill-head">
+          <div class="skill-emoji">${s.emoji}</div>
+          <div class="skill-head-text">
+            <h3>${s.name}</h3>
+            <p>${s.desc}</p>
+          </div>
+          <span class="skill-chevron">▶</span>
+        </div>
+        <div class="skill-body">
+          <div class="skill-demo">
+            <div class="demo-col input">
+              <label>Input</label>
+              <pre>${s.input}</pre>
+            </div>
+            <div class="demo-col output">
+              <label>Output</label>
+              <pre>${s.output}</pre>
+            </div>
+          </div>
+        </div>
+      `;
+      el.querySelector('.skill-head').addEventListener('click', () => {
+        document.querySelectorAll('.skill-item').forEach(x => x.classList.remove('active'));
+        el.classList.add('active');
+      });
+      container.appendChild(el);
+    });
+  </script>
+</body>
+</html>
