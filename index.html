@@ -6,11 +6,201 @@
   <title>Accounting AI — Automate Your Books</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #09090b;
+  --bg2: #111113;
+  --bg3: #18181b;
+  --border: #27272a;
+  --text: #fafafa;
+  --muted: #71717a;
+  --accent: #6366f1;
+  --accent2: #8b5cf6;
+  --green: #22c55e;
+  --yellow: #eab308;
+  --red: #ef4444;
+  --radius: 12px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* NAV */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--border);
+  background: rgba(9,9,11,0.85);
+  backdrop-filter: blur(12px);
+}
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color 0.15s; }
+.nav-links a:hover { color: var(--text); }
+.btn-nav { color: var(--text) !important; background: var(--bg3); border: 1px solid var(--border); padding: 6px 16px; border-radius: 8px; font-size: 0.875rem !important; }
+.btn-nav:hover { border-color: var(--accent) !important; }
+
+/* HERO */
+.hero { max-width: 760px; margin: 0 auto; padding: 100px 24px 80px; text-align: center; }
+.hero-badge { display: inline-block; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3); color: #a5b4fc; font-size: 0.8rem; font-weight: 500; padding: 4px 14px; border-radius: 100px; margin-bottom: 24px; }
+.hero h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.04em; margin-bottom: 20px; }
+.gradient { background: linear-gradient(135deg, var(--accent), var(--accent2), #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-sub { color: var(--muted); font-size: 1.1rem; max-width: 540px; margin: 0 auto 36px; line-height: 1.7; }
+.hero-cta { display: flex; gap: 12px; justify-content: center; margin-bottom: 60px; flex-wrap: wrap; }
+.btn-primary { background: var(--accent); color: #fff; padding: 12px 28px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; border: none; cursor: pointer; transition: opacity 0.15s, transform 0.1s; display: inline-block; }
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--muted); padding: 12px 24px; border-radius: 10px; text-decoration: none; font-size: 0.95rem; border: 1px solid var(--border); transition: color 0.15s, border-color 0.15s; }
+.btn-ghost:hover { color: var(--text); border-color: var(--muted); }
+.hero-stats { display: flex; justify-content: center; align-items: center; gap: 32px; flex-wrap: wrap; }
+.stat { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.stat-num { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.03em; }
+.stat-label { font-size: 0.78rem; color: var(--muted); }
+.stat-divider { width: 1px; height: 36px; background: var(--border); }
+
+/* SECTIONS */
+section { padding: 80px 24px; }
+.section-label { text-align: center; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+section > h2 { text-align: center; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 12px; }
+.section-sub { text-align: center; color: var(--muted); max-width: 500px; margin: 0 auto 52px; font-size: 1rem; }
+
+/* SKILLS GRID */
+.skills { max-width: 1100px; margin: 0 auto; }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.skill-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; transition: border-color 0.2s, transform 0.15s; cursor: default; }
+.skill-card:hover { border-color: rgba(99,102,241,0.4); transform: translateY(-2px); }
+.skill-icon { font-size: 2rem; margin-bottom: 14px; }
+.skill-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em; }
+.skill-card > p { color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; }
+.skill-output { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.output-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding: 8px 14px; border-bottom: 1px solid var(--border); }
+.skill-output pre, .try-output pre { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.8rem; color: #a1a1aa; padding: 14px; white-space: pre-wrap; line-height: 1.6; }
+
+/* HOW IT WORKS */
+.how { max-width: 900px; margin: 0 auto; }
+.steps { display: flex; align-items: flex-start; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.step { flex: 1; min-width: 200px; max-width: 260px; text-align: center; }
+.step-num { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.04em; color: var(--border); margin-bottom: 12px; line-height: 1; }
+.step h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+.step p { color: var(--muted); font-size: 0.9rem; }
+.step-arrow { font-size: 1.6rem; color: var(--border); margin-top: 20px; flex-shrink: 0; }
+
+/* TRY IT */
+.try-it { max-width: 760px; margin: 0 auto; }
+.try-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 40px; }
+.try-card h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.02em; }
+.try-card > p { color: var(--muted); font-size: 0.95rem; margin-bottom: 20px; }
+.try-row { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+select { background: var(--bg3); border: 1px solid var(--border); color: var(--text); padding: 10px 14px; border-radius: 8px; font-family: inherit; font-size: 0.9rem; flex: 1; min-width: 200px; cursor: pointer; }
+select:focus { outline: none; border-color: var(--accent); }
+textarea { width: 100%; background: var(--bg3); border: 1px solid var(--border); color: var(--text); padding: 14px; border-radius: 8px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.85rem; min-height: 140px; resize: vertical; transition: border-color 0.15s; margin-bottom: 12px; }
+textarea:focus { outline: none; border-color: var(--accent); }
+textarea::placeholder { color: var(--muted); }
+.try-output { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; min-height: 120px; }
+.output-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+.output-header .output-label { border-bottom: none; }
+.btn-export { background: transparent; border: none; color: var(--muted); font-size: 0.75rem; font-weight: 600; padding: 8px 14px; cursor: pointer; transition: color 0.15s; font-family: inherit; white-space: nowrap; }
+.btn-export:not(:disabled):hover { color: var(--green); }
+.btn-export:disabled { opacity: 0.3; cursor: default; }
+.btn-export.ready { color: var(--green); }
+#output-pre { color: var(--muted); }
+#output-pre.ready { color: var(--green); }
+
+/* BULK UPLOAD */
+.bulk { max-width: 860px; margin: 0 auto; }
+.bulk-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+.drop-zone { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 60px 40px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; text-align: center; }
+.drop-zone.drag-over { background: rgba(99,102,241,0.06); }
+.drop-icon { font-size: 2.8rem; line-height: 1; }
+.drop-title { font-size: 1.1rem; font-weight: 600; margin: 0; }
+.drop-sub { color: var(--muted); font-size: 0.875rem; margin: 0; }
+.queue-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 10px; }
+.queue-meta { font-size: 0.875rem; color: var(--muted); font-weight: 500; }
+.queue-actions { display: flex; gap: 8px; }
+.btn-sm { padding: 6px 14px !important; font-size: 0.8rem !important; }
+.file-list { display: flex; flex-direction: column; }
+.file-row { display: grid; grid-template-columns: 28px 1fr auto auto; align-items: center; gap: 12px; padding: 12px 20px; border-bottom: 1px solid var(--border); transition: background 0.1s; }
+.file-row:last-child { border-bottom: none; }
+.file-row:hover { background: var(--bg3); }
+.file-icon { font-size: 1.2rem; text-align: center; }
+.file-info { min-width: 0; }
+.file-name { font-size: 0.875rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.file-size { font-size: 0.75rem; color: var(--muted); }
+.file-skill select { background: var(--bg3); border: 1px solid var(--border); color: var(--muted); padding: 4px 8px; border-radius: 6px; font-size: 0.78rem; font-family: inherit; cursor: pointer; min-width: 0; flex: unset; min-width: unset; }
+.file-status { font-size: 0.75rem; font-weight: 600; padding: 3px 10px; border-radius: 100px; white-space: nowrap; }
+.status-pending { color: var(--muted); background: var(--bg3); }
+.status-processing { color: #f59e0b; background: rgba(245,158,11,0.1); }
+.status-done { color: var(--green); background: rgba(34,197,94,0.1); }
+.status-error { color: var(--red); background: rgba(239,68,68,0.1); }
+.results-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.results-title { font-size: 0.875rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; }
+.results-list { display: flex; flex-direction: column; }
+.result-row { border-bottom: 1px solid var(--border); overflow: hidden; }
+.result-row:last-child { border-bottom: none; }
+.result-header { display: flex; align-items: center; gap: 12px; padding: 12px 20px; cursor: pointer; transition: background 0.1s; }
+.result-header:hover { background: var(--bg3); }
+.result-chevron { color: var(--muted); font-size: 0.7rem; transition: transform 0.2s; flex-shrink: 0; }
+.result-row.open .result-chevron { transform: rotate(90deg); }
+.result-file { font-size: 0.875rem; font-weight: 500; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.result-skill-tag { font-size: 0.72rem; font-weight: 600; padding: 2px 8px; border-radius: 100px; background: rgba(99,102,241,0.15); color: #a5b4fc; white-space: nowrap; }
+.result-body { display: none; background: var(--bg3); border-top: 1px solid var(--border); }
+.result-row.open .result-body { display: block; }
+.result-pre { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.8rem; color: var(--green); padding: 16px 20px; white-space: pre-wrap; line-height: 1.6; margin: 0; }
+
+/* PRICING */
+.pricing { max-width: 960px; margin: 0 auto; }
+.plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; align-items: stretch; }
+.plan { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px; position: relative; display: flex; flex-direction: column; gap: 20px; }
+.plan-featured { border-color: var(--accent); background: linear-gradient(160deg, rgba(99,102,241,0.08), var(--bg2)); }
+.plan-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 0.72rem; font-weight: 600; padding: 3px 12px; border-radius: 100px; white-space: nowrap; }
+.plan-name { font-size: 0.9rem; font-weight: 600; color: var(--muted); }
+.plan-price { font-size: 2.6rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+.plan-price span { font-size: 1rem; font-weight: 400; color: var(--muted); }
+.plan ul { list-style: none; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.plan li { font-size: 0.9rem; color: var(--muted); }
+.plan li:first-child, .plan li:nth-child(2), .plan li:nth-child(3) { color: var(--text); }
+.plan-featured li { color: var(--text) !important; }
+.btn-plan { display: block; text-align: center; padding: 12px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 600; border: 1px solid var(--border); color: var(--text); transition: border-color 0.15s; }
+.btn-plan:hover { border-color: var(--muted); }
+.btn-plan-featured { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-plan-featured:hover { opacity: 0.9; border-color: var(--accent) !important; }
+
+/* FOOTER */
+footer { border-top: 1px solid var(--border); padding: 40px 24px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.footer-inner p { color: var(--muted); font-size: 0.875rem; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; }
+.footer-links a:hover { color: var(--text); }
+
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .step-arrow { display: none; }
+  .steps { flex-direction: column; align-items: center; }
+  .try-card { padding: 24px; }
+}
+  </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <div class="nav-inner">
       <div class="logo">⚡ AccountingAI</div>
@@ -24,7 +214,6 @@
     </div>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-badge">Powered by Claude AI</div>
     <h1>Your accounting,<br /><span class="gradient">done in seconds.</span></h1>
@@ -42,31 +231,24 @@
     </div>
   </section>
 
-  <!-- SKILLS -->
   <section class="skills" id="skills">
     <div class="section-label">What it can do</div>
     <h2>Five skills. Zero manual work.</h2>
     <p class="section-sub">Each skill handles a real accounting task — just paste or upload your document and get structured output instantly.</p>
-
     <div class="skills-grid">
-
-      <div class="skill-card" data-skill="receipt">
+      <div class="skill-card">
         <div class="skill-icon">🧾</div>
         <h3>Receipt Processing</h3>
         <p>Extract vendor, date, amount, tax, and category from any receipt — image, PDF, or pasted text.</p>
         <div class="skill-output">
           <div class="output-label">Output</div>
-          <pre>{
-  "vendor": "Staples",
-  "date": "2026-03-14",
-  "amount": 84.32,
-  "tax": 7.18,
-  "category": "Office Supplies"
-}</pre>
+          <pre>Vendor     Staples #0842
+Date       Mar 14, 2026
+Category   Office Supplies
+Total      $79.16</pre>
         </div>
       </div>
-
-      <div class="skill-card" data-skill="categorize">
+      <div class="skill-card">
         <div class="skill-icon">🏷️</div>
         <h3>Expense Categorization</h3>
         <p>Paste a CSV of transactions. Every line gets classified into a standard accounting category automatically.</p>
@@ -78,23 +260,19 @@ Zoom Pro → Software & Subscriptions
 WeWork → Rent & Facilities</pre>
         </div>
       </div>
-
-      <div class="skill-card" data-skill="invoice">
+      <div class="skill-card">
         <div class="skill-icon">📄</div>
         <h3>Invoice Management</h3>
         <p>Upload an invoice and get every field extracted — line items, totals, due dates, and overdue flags.</p>
         <div class="skill-output">
           <div class="output-label">Output</div>
-          <pre>{
-  "invoice_no": "INV-2291",
-  "due": "2026-04-01",
-  "total": 4200.00,
-  "status": "OVERDUE"
-}</pre>
+          <pre>Invoice #  INV-2291
+Due        Mar 1, 2026
+Total      $4,180.00
+Status     ⚠️ OVERDUE</pre>
         </div>
       </div>
-
-      <div class="skill-card" data-skill="reconcile">
+      <div class="skill-card">
         <div class="skill-icon">⚖️</div>
         <h3>Bank Reconciliation</h3>
         <p>Drop in your bank statement and bookkeeping records. AI matches every transaction and flags gaps.</p>
@@ -106,8 +284,7 @@ WeWork → Rent & Facilities</pre>
 Net difference: $0.00</pre>
         </div>
       </div>
-
-      <div class="skill-card" data-skill="report">
+      <div class="skill-card">
         <div class="skill-icon">📊</div>
         <h3>Monthly Reporting</h3>
         <p>Feed in raw transactions and get a full P&amp;L — revenue, expenses by category, net income, and trends.</p>
@@ -119,15 +296,12 @@ Net:       $16,550
 MoM:       ▲ 12.4%</pre>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
   <section class="how" id="how">
     <div class="section-label">How it works</div>
     <h2>Three steps to clean books.</h2>
-
     <div class="steps">
       <div class="step">
         <div class="step-num">01</div>
@@ -144,12 +318,11 @@ MoM:       ▲ 12.4%</pre>
       <div class="step">
         <div class="step-num">03</div>
         <h3>Get structured output</h3>
-        <p>Clean JSON, CSV, or a readable report — ready to paste into QuickBooks, Xero, or your workflow.</p>
+        <p>Clean, readable summaries — ready to paste into QuickBooks, Xero, or your workflow.</p>
       </div>
     </div>
   </section>
 
-  <!-- TRY IT -->
   <section class="try-it" id="try">
     <div class="try-card">
       <h2>Try it now</h2>
@@ -175,15 +348,11 @@ MoM:       ▲ 12.4%</pre>
     </div>
   </section>
 
-  <!-- BULK UPLOAD -->
   <section class="bulk" id="bulk">
     <div class="section-label">Bulk Processing</div>
     <h2>Process dozens of files at once.</h2>
     <p class="section-sub">Drop all your Excel, CSV, or PDF files in one go. AI assigns the right skill to each one automatically.</p>
-
     <div class="bulk-card">
-
-      <!-- Drop Zone -->
       <div class="drop-zone" id="drop-zone">
         <input type="file" id="file-input" multiple accept=".xlsx,.xls,.csv,.pdf,.txt" hidden />
         <div class="drop-icon">📂</div>
@@ -191,8 +360,6 @@ MoM:       ▲ 12.4%</pre>
         <p class="drop-sub">Excel, CSV, PDF — any format. Up to 50 files at once.</p>
         <button class="btn-ghost" id="browse-btn">Browse files</button>
       </div>
-
-      <!-- File Queue -->
       <div class="file-queue" id="file-queue" style="display:none">
         <div class="queue-header">
           <div class="queue-meta" id="queue-meta">0 files selected</div>
@@ -203,8 +370,6 @@ MoM:       ▲ 12.4%</pre>
         </div>
         <div class="file-list" id="file-list"></div>
       </div>
-
-      <!-- Results -->
       <div class="bulk-results" id="bulk-results" style="display:none">
         <div class="results-header">
           <div class="results-title" id="results-title">Results</div>
@@ -212,15 +377,12 @@ MoM:       ▲ 12.4%</pre>
         </div>
         <div class="results-list" id="results-list"></div>
       </div>
-
     </div>
   </section>
 
-  <!-- PRICING -->
   <section class="pricing" id="pricing">
     <div class="section-label">Pricing</div>
     <h2>Simple, honest pricing.</h2>
-
     <div class="plans">
       <div class="plan">
         <div class="plan-name">Starter</div>
@@ -228,8 +390,8 @@ MoM:       ▲ 12.4%</pre>
         <ul>
           <li>✓ 50 documents/month</li>
           <li>✓ All 5 skills</li>
-          <li>✓ JSON output</li>
-          <li>✗ CSV export</li>
+          <li>✓ Excel export</li>
+          <li>✗ Bulk processing</li>
           <li>✗ API access</li>
         </ul>
         <a href="#" class="btn-plan">Get started free</a>
@@ -241,7 +403,7 @@ MoM:       ▲ 12.4%</pre>
         <ul>
           <li>✓ Unlimited documents</li>
           <li>✓ All 5 skills</li>
-          <li>✓ JSON + CSV export</li>
+          <li>✓ Bulk processing</li>
           <li>✓ API access</li>
           <li>✓ Priority support</li>
         </ul>
@@ -262,7 +424,6 @@ MoM:       ▲ 12.4%</pre>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
       <div class="logo">⚡ AccountingAI</div>
@@ -275,6 +436,211 @@ MoM:       ▲ 12.4%</pre>
     </div>
   </footer>
 
-  <script src="app.js"></script>
+  <script>
+const sampleInputs = {
+  receipt: `Staples #0842 - Store Receipt\nDate: March 14, 2026\n---------------------------\nPrinter Paper (2x)    $24.98\nInk Cartridge (Black) $34.99\nSticky Notes 3-pack   $12.99\n---------------------------\nSubtotal:             $72.96\nTax (8.5%):            $6.20\n---------------------------\nTOTAL:                $79.16\nPayment: Visa ****4821`,
+  categorize: `Date,Merchant,Amount\n2026-03-01,Uber Eats,48.20\n2026-03-02,Delta Airlines,380.00\n2026-03-03,Zoom Pro,15.99\n2026-03-05,WeWork Monthly,800.00\n2026-03-07,Staples,79.16\n2026-03-10,AWS,142.50\n2026-03-12,Marriott Hotel,220.00\n2026-03-14,Adobe Creative Cloud,54.99`,
+  invoice: `INVOICE #INV-2291\nFrom: Design Studio LLC\nTo: Acme Corp\nDate: 2026-02-15\nDue: 2026-03-01\n\nServices:\nBrand Redesign (40hrs @ $85)    $3,400.00\nLogo Files & Assets               $400.00\nRush Fee (10%)                    $380.00\n--------------------------------------\nSubtotal:                       $4,180.00\nTax (0%):                           $0.00\nTOTAL DUE:                      $4,180.00`,
+  reconcile: `BANK STATEMENT (March 2026):\n03/01 Payroll Direct Debit     -$12,400.00\n03/03 Client Payment ACME       +$8,500.00\n03/05 WeWork                     -$800.00\n03/07 Staples                     -$79.16\n03/09 Duplicate charge Zoom      -$15.99\n03/10 AWS                        -$142.50\n\nBOOKS:\n03/01 Payroll                  -$12,400.00\n03/03 ACME Invoice #209         +$8,500.00\n03/05 WeWork Rent                -$800.00\n03/07 Office Supplies             -$79.16\n03/10 AWS Cloud                  -$142.50`,
+  report: `TRANSACTIONS - MARCH 2026\n\nREVENUE:\n03/03  Client ACME Corp         $8,500.00\n03/15  Client Bright Ideas      $6,200.00\n03/22  Client NorthStar LLC    $12,800.00\n03/28  Retainer - FiveOaks       $4,500.00\n\nEXPENSES:\n03/01  Payroll                 $12,400.00\n03/05  WeWork Rent                $800.00\n03/07  Office Supplies             $79.16\n03/09  Zoom Pro                    $15.99\n03/10  AWS                        $142.50\n03/12  Travel - Client Visit      $380.00\n03/14  Adobe CC                    $54.99\n\nFEBRUARY NET: $14,750.00`
+};
+
+const sampleOutputs = {
+  receipt: `RECEIPT SUMMARY\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nVendor       Staples #0842\nDate         Mar 14, 2026\nPayment      Visa ****4821\nCategory     Office Supplies\n\nLINE ITEMS\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nPrinter Paper (2x)                $24.98\nInk Cartridge (Black)             $34.99\nSticky Notes 3-pack               $12.99\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nSubtotal                          $72.96\nTax (8.5%)                         $6.20\nTOTAL                             $79.16`,
+  categorize: `Date        Merchant                  Amount     Category\n─────────────────────────────────────────────────────────\n2026-03-01  Uber Eats                 $48.20     Meals & Entertainment\n2026-03-02  Delta Airlines           $380.00     Travel\n2026-03-03  Zoom Pro                  $15.99     Software & Subscriptions\n2026-03-05  WeWork Monthly           $800.00     Rent & Facilities\n2026-03-07  Staples                   $79.16     Office Supplies\n2026-03-10  AWS                      $142.50     Software & Subscriptions\n2026-03-12  Marriott Hotel           $220.00     Travel\n2026-03-14  Adobe Creative Cloud      $54.99     Software & Subscriptions`,
+  invoice: `INVOICE SUMMARY\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nInvoice #    INV-2291\nVendor       Design Studio LLC\nClient       Acme Corp\nIssued       Feb 15, 2026\nDue          Mar 1, 2026\nStatus       ⚠️  OVERDUE — 18 days\n\nLINE ITEMS\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nBrand Redesign (40hrs @ $85)    $3,400.00\nLogo Files & Assets               $400.00\nRush Fee (10%)                    $380.00\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nSubtotal                        $4,180.00\nTax                                 $0.00\nTOTAL DUE                       $4,180.00`,
+  reconcile: `RECONCILIATION SUMMARY — March 2026\n══════════════════════════════════════\n\n✅  5 transactions matched\n⚠️  1 unmatched in bank (Client ACME - missing from books)\n❌  1 DUPLICATE detected: Zoom Pro charged twice on 03/09\n\nMatched transactions:    $-13,421.66\nUnmatched (bank only):   +$8,500.00\nDuplicate charge:           -$15.99\n\nNet difference:          $8,500.00\nAction required:         Book ACME payment + dispute Zoom duplicate`,
+  report: `MONTHLY REPORT — March 2026\n══════════════════════════════════\n\nREVENUE\n  Client ACME Corp               $8,500.00\n  Client Bright Ideas            $6,200.00\n  Client NorthStar LLC          $12,800.00\n  Retainer - FiveOaks            $4,500.00\n  ─────────────────────────────────────────\n  Total Revenue                 $32,000.00\n\nEXPENSES\n  Payroll                       $12,400.00\n  Rent & Facilities                $800.00\n  Office Supplies                   $79.16\n  Software & Subscriptions         $212.48\n  Travel                           $380.00\n  ─────────────────────────────────────────\n  Total Expenses                $13,871.64\n\nNET INCOME                      $18,128.36\nFebruary Net                    $14,750.00\nMonth-over-Month                 ▲ +22.9%`
+};
+
+const exportData = {
+  receipt: { filename: 'receipt_staples_2026-03-14.csv', csv: `Field,Value\nVendor,Staples #0842\nDate,2026-03-14\nPayment Method,Visa ****4821\nCategory,Office Supplies\n,,\nItem,Amount\nPrinter Paper (2x),24.98\nInk Cartridge (Black),34.99\nSticky Notes 3-pack,12.99\n,,\nSubtotal,72.96\nTax,6.20\nTotal,79.16` },
+  categorize: { filename: 'expenses_categorized_march2026.csv', csv: `Date,Merchant,Amount,Category\n2026-03-01,Uber Eats,48.20,Meals & Entertainment\n2026-03-02,Delta Airlines,380.00,Travel\n2026-03-03,Zoom Pro,15.99,Software & Subscriptions\n2026-03-05,WeWork Monthly,800.00,Rent & Facilities\n2026-03-07,Staples,79.16,Office Supplies\n2026-03-10,AWS,142.50,Software & Subscriptions\n2026-03-12,Marriott Hotel,220.00,Travel\n2026-03-14,Adobe Creative Cloud,54.99,Software & Subscriptions` },
+  invoice: { filename: 'invoice_INV-2291.csv', csv: `Field,Value\nInvoice #,INV-2291\nVendor,Design Studio LLC\nClient,Acme Corp\nIssue Date,2026-02-15\nDue Date,2026-03-01\nStatus,OVERDUE — 18 days\n,,\nDescription,Amount\nBrand Redesign (40hrs @ $85),3400.00\nLogo Files & Assets,400.00\nRush Fee (10%),380.00\n,,\nSubtotal,4180.00\nTax,0.00\nTotal Due,4180.00` },
+  reconcile: { filename: 'reconciliation_march2026.csv', csv: `Transaction Date,Description,Bank Amount,Books Amount,Status,Notes\n2026-03-01,Payroll,-12400.00,-12400.00,Matched,\n2026-03-03,Client ACME,8500.00,,Unmatched,Missing from books\n2026-03-05,WeWork,-800.00,-800.00,Matched,\n2026-03-07,Staples,-79.16,-79.16,Matched,\n2026-03-09,Zoom Pro,-15.99,,Duplicate,Charged twice — dispute\n2026-03-10,AWS,-142.50,-142.50,Matched,` },
+  report: { filename: 'monthly_report_march2026.csv', csv: `Category,Type,Amount\nClient ACME Corp,Revenue,8500.00\nClient Bright Ideas,Revenue,6200.00\nClient NorthStar LLC,Revenue,12800.00\nRetainer - FiveOaks,Revenue,4500.00\nTotal Revenue,,32000.00\n,,\nPayroll,Expense,12400.00\nRent & Facilities,Expense,800.00\nOffice Supplies,Expense,79.16\nSoftware & Subscriptions,Expense,212.48\nTravel,Expense,380.00\nTotal Expenses,,13871.64\n,,\nNet Income,,18128.36\nFebruary Net,,14750.00\nMonth-over-Month Change,,+22.9%` }
+};
+
+function downloadCSV(skill) {
+  const { filename, csv } = exportData[skill];
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ── BULK UPLOAD ──────────────────────────────────────────────
+const dropZone = document.getElementById('drop-zone');
+const fileInput = document.getElementById('file-input');
+const browseBtn = document.getElementById('browse-btn');
+const fileQueue = document.getElementById('file-queue');
+const fileListEl = document.getElementById('file-list');
+const queueMeta = document.getElementById('queue-meta');
+const clearBtn = document.getElementById('clear-btn');
+const processAllBtn = document.getElementById('process-all-btn');
+const bulkResults = document.getElementById('bulk-results');
+const resultsList = document.getElementById('results-list');
+const resultsTitle = document.getElementById('results-title');
+const exportAllBtn = document.getElementById('export-all-btn');
+let uploadedFiles = [];
+
+const skillOptions = [
+  { value: 'auto', label: '🤖 Auto-detect' },
+  { value: 'receipt', label: '🧾 Receipt Processing' },
+  { value: 'categorize', label: '🏷️ Expense Categorization' },
+  { value: 'invoice', label: '📄 Invoice Management' },
+  { value: 'reconcile', label: '⚖️ Bank Reconciliation' },
+  { value: 'report', label: '📊 Monthly Reporting' },
+];
+
+function detectSkill(filename) {
+  const f = filename.toLowerCase();
+  if (f.includes('receipt') || f.includes('staples') || f.includes('amazon')) return 'receipt';
+  if (f.includes('invoice') || f.includes('inv-') || f.includes('bill')) return 'invoice';
+  if (f.includes('bank') || f.includes('statement') || f.includes('recon')) return 'reconcile';
+  if (f.includes('report') || f.includes('p&l') || f.includes('monthly')) return 'report';
+  return 'categorize';
+}
+
+function fileIcon(name) {
+  const ext = name.split('.').pop().toLowerCase();
+  if (ext === 'pdf') return '📄';
+  if (['xlsx','xls'].includes(ext)) return '📊';
+  if (ext === 'csv') return '📋';
+  return '📁';
+}
+
+function formatSize(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1048576) return (bytes/1024).toFixed(1) + ' KB';
+  return (bytes/1048576).toFixed(1) + ' MB';
+}
+
+function renderFileList() {
+  fileListEl.innerHTML = '';
+  uploadedFiles.forEach((f, i) => {
+    const row = document.createElement('div');
+    row.className = 'file-row';
+    const detectedSkill = detectSkill(f.name);
+    const opts = skillOptions.map(o => `<option value="${o.value}" ${o.value === detectedSkill ? 'selected' : ''}>${o.label}</option>`).join('');
+    row.innerHTML = `<div class="file-icon">${fileIcon(f.name)}</div><div class="file-info"><div class="file-name">${f.name}</div><div class="file-size">${formatSize(f.size)}</div></div><div class="file-skill"><select>${opts}</select></div><div class="file-status status-pending" id="status-${i}">Pending</div>`;
+    fileListEl.appendChild(row);
+  });
+  queueMeta.textContent = `${uploadedFiles.length} file${uploadedFiles.length !== 1 ? 's' : ''} selected`;
+  fileQueue.style.display = 'block';
+  bulkResults.style.display = 'none';
+  resultsList.innerHTML = '';
+}
+
+function addFiles(newFiles) {
+  Array.from(newFiles).forEach(f => { if (!uploadedFiles.find(e => e.name === f.name)) uploadedFiles.push(f); });
+  renderFileList();
+}
+
+browseBtn.addEventListener('click', (e) => { e.stopPropagation(); fileInput.click(); });
+dropZone.addEventListener('click', () => fileInput.click());
+fileInput.addEventListener('change', () => addFiles(fileInput.files));
+dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('drag-over'); addFiles(e.dataTransfer.files); });
+clearBtn.addEventListener('click', () => { uploadedFiles = []; fileQueue.style.display = 'none'; bulkResults.style.display = 'none'; fileInput.value = ''; });
+
+const bulkOutputs = {
+  receipt:    (n) => `RECEIPT SUMMARY — ${n}\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nVendor     Extracted from file\nDate       2026-03-${String(Math.floor(Math.random()*28)+1).padStart(2,'0')}\nCategory   Office Supplies\nTotal      $${(Math.random()*200+20).toFixed(2)}`,
+  categorize: (n) => `CATEGORIZATION — ${n}\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n${Math.floor(Math.random()*20+5)} transactions processed\nTop category: Software & Subscriptions\nUncategorized: 0\nReady for export`,
+  invoice:    (n) => `INVOICE SUMMARY — ${n}\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nInvoice #  INV-${Math.floor(Math.random()*9000+1000)}\nVendor     Extracted from file\nDue        2026-04-${String(Math.floor(Math.random()*28)+1).padStart(2,'0')}\nTotal      $${(Math.random()*5000+500).toFixed(2)}\nStatus     ✅ On time`,
+  reconcile:  (n) => `RECONCILIATION — ${n}\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n✅ ${Math.floor(Math.random()*40+10)} matched\n⚠️  ${Math.floor(Math.random()*3)} unmatched\n❌  0 duplicates\nNet difference: $0.00`,
+  report:     (n) => `MONTHLY REPORT — ${n}\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nRevenue    $${(Math.random()*40000+10000).toFixed(2)}\nExpenses   $${(Math.random()*20000+5000).toFixed(2)}\nNet        $${(Math.random()*15000+3000).toFixed(2)}\nMoM        ▲ ${(Math.random()*20+1).toFixed(1)}%`,
+};
+
+processAllBtn.addEventListener('click', async () => {
+  if (!uploadedFiles.length) return;
+  processAllBtn.disabled = true;
+  processAllBtn.textContent = 'Processing...';
+  bulkResults.style.display = 'block';
+  resultsList.innerHTML = '';
+  resultsTitle.textContent = `Processing ${uploadedFiles.length} files...`;
+  const rows = fileListEl.querySelectorAll('.file-row');
+  const allResults = [];
+  for (let i = 0; i < uploadedFiles.length; i++) {
+    const file = uploadedFiles[i];
+    const statusEl = document.getElementById(`status-${i}`);
+    let skill = rows[i].querySelector('select').value;
+    if (skill === 'auto') skill = detectSkill(file.name);
+    statusEl.textContent = 'Processing…';
+    statusEl.className = 'file-status status-processing';
+    await new Promise(r => setTimeout(r, 600 + Math.random() * 600));
+    const output = bulkOutputs[skill](file.name);
+    allResults.push({ name: file.name, skill, output });
+    statusEl.textContent = 'Done';
+    statusEl.className = 'file-status status-done';
+    const skillLabel = skillOptions.find(o => o.value === skill)?.label || skill;
+    const resultRow = document.createElement('div');
+    resultRow.className = 'result-row';
+    resultRow.innerHTML = `<div class="result-header"><span class="result-chevron">▶</span><span class="result-file">${file.name}</span><span class="result-skill-tag">${skillLabel}</span><span class="file-status status-done">Done</span></div><div class="result-body"><pre class="result-pre">${output}</pre></div>`;
+    resultRow.querySelector('.result-header').addEventListener('click', () => resultRow.classList.toggle('open'));
+    resultsList.appendChild(resultRow);
+    if (i === 0) resultRow.classList.add('open');
+  }
+  resultsTitle.textContent = `${uploadedFiles.length} files processed`;
+  processAllBtn.disabled = false;
+  processAllBtn.textContent = '⚡ Process all';
+  exportAllBtn.onclick = () => {
+    const rows = ['File,Skill,Output Summary'];
+    allResults.forEach(r => {
+      const summary = r.output.split('\n').slice(0,3).join(' | ').replace(/,/g, ';');
+      rows.push(`"${r.name}","${r.skill}","${summary}"`);
+    });
+    const blob = new Blob([rows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'bulk_results.csv'; a.click();
+    URL.revokeObjectURL(url);
+  };
+});
+
+// ── TRY-IT SECTION ───────────────────────────────────────────
+const skillSelect = document.getElementById('skill-select');
+const docInput = document.getElementById('doc-input');
+const runBtn = document.getElementById('run-btn');
+const outputPre = document.getElementById('output-pre');
+const exportBtn = document.getElementById('export-btn');
+
+exportBtn.addEventListener('click', () => downloadCSV(skillSelect.value));
+
+skillSelect.addEventListener('change', () => {
+  docInput.value = sampleInputs[skillSelect.value];
+  outputPre.textContent = '// Waiting for input...';
+  outputPre.className = '';
+  exportBtn.disabled = true;
+  exportBtn.className = 'btn-export';
+});
+
+docInput.value = sampleInputs['receipt'];
+
+runBtn.addEventListener('click', () => {
+  const skill = skillSelect.value;
+  if (!docInput.value.trim()) { outputPre.textContent = '// Please paste a document above.'; return; }
+  runBtn.disabled = true;
+  runBtn.textContent = 'Processing...';
+  outputPre.textContent = '// Analyzing document...';
+  outputPre.className = '';
+  const steps = ['// Reading document structure...', '// Extracting fields...', '// Applying ' + skillSelect.options[skillSelect.selectedIndex].text + '...', '// Formatting output...'];
+  let i = 0;
+  const interval = setInterval(() => {
+    if (i < steps.length) { outputPre.textContent = steps[i++]; }
+    else {
+      clearInterval(interval);
+      outputPre.textContent = sampleOutputs[skill];
+      outputPre.className = 'ready';
+      runBtn.disabled = false;
+      runBtn.textContent = 'Run skill →';
+      exportBtn.disabled = false;
+      exportBtn.className = 'btn-export ready';
+    }
+  }, 400);
+});
+  </script>
 </body>
 </html>
