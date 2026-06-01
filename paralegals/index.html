@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hubungi Kami — Paralegals.id</title>
+  <meta name="description" content="Butuh bantuan hukum, pendirian PT, atau pembuatan kontrak? Hubungi tim Paralegals.id. Konsultasi cepat lewat WhatsApp, email, atau isi formulir di bawah." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #0d1b3e;
+  --navy2: #14264f;
+  --ink: #1a2540;
+  --paper: #f7f9fc;
+  --white: #ffffff;
+  --line: #e3e8f0;
+  --muted: #5b6781;
+  --accent: #0e7c66;     /* legal green */
+  --accent2: #14a085;
+  --gold: #c79a3a;
+  --radius: 16px;
+  --shadow: 0 10px 40px rgba(13,27,62,0.08);
+  --shadow-lg: 0 24px 60px rgba(13,27,62,0.14);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.65;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(247,249,252,0.85);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner { height: 68px; display: flex; align-items: center; justify-content: space-between; }
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; text-decoration: none; color: var(--navy); }
+.logo-mark { width: 34px; height: 34px; border-radius: 9px; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: grid; place-items: center; color: #fff; font-size: 1rem; box-shadow: 0 4px 14px rgba(14,124,102,0.35); }
+.logo b { color: var(--accent); }
+.nav-links { display: flex; align-items: center; gap: 30px; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 0.92rem; font-weight: 500; transition: color 0.15s; }
+.nav-links a:hover, .nav-links a.active { color: var(--navy); }
+.btn-wa { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff !important; padding: 9px 18px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: transform 0.12s, box-shadow 0.15s; box-shadow: 0 6px 18px rgba(14,124,102,0.25); }
+.btn-wa:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(14,124,102,0.32); }
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; font-size: 1.5rem; color: var(--navy); }
+
+/* HERO */
+.hero { position: relative; overflow: hidden; background: linear-gradient(160deg, var(--navy) 0%, var(--navy2) 60%, #0a2a4d 100%); color: #fff; }
+.hero::after { content: ""; position: absolute; inset: 0; background: radial-gradient(700px 320px at 85% -10%, rgba(20,160,133,0.28), transparent), radial-gradient(500px 260px at 5% 110%, rgba(199,154,58,0.16), transparent); pointer-events: none; }
+.hero-inner { position: relative; padding: 80px 24px 96px; max-width: 760px; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #8fe3cf; background: rgba(20,160,133,0.14); border: 1px solid rgba(20,160,133,0.3); padding: 6px 14px; border-radius: 100px; }
+.hero h1 { font-size: clamp(2.3rem, 6vw, 3.6rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.03em; margin: 22px 0 18px; }
+.hero h1 span { color: #8fe3cf; }
+.hero p { font-size: 1.12rem; color: #c7d2e6; max-width: 560px; }
+.hero-quick { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.quick-chip { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); color: #eaf1fb; padding: 8px 16px; border-radius: 100px; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: background 0.15s, border-color 0.15s; }
+.quick-chip:hover { background: rgba(255,255,255,0.13); border-color: rgba(255,255,255,0.3); }
+
+/* MAIN GRID */
+.contact-section { padding: 72px 0 40px; }
+.contact-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 28px; align-items: start; }
+
+/* FORM CARD */
+.card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+.form-card { padding: 38px; }
+.form-card h2 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; color: var(--navy); }
+.form-card > p { color: var(--muted); margin: 6px 0 26px; font-size: 0.96rem; }
+.field { margin-bottom: 18px; }
+.field label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--ink); margin-bottom: 7px; }
+.field label .req { color: #d4503e; }
+.field input, .field select, .field textarea {
+  width: 100%; font-family: inherit; font-size: 0.95rem; color: var(--ink);
+  background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+  padding: 12px 14px; transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+.field input::placeholder, .field textarea::placeholder { color: #9aa6bd; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); background: #fff; box-shadow: 0 0 0 4px rgba(14,124,102,0.1); }
+.field textarea { min-height: 130px; resize: vertical; }
+.field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235b6781' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field-error { color: #d4503e; font-size: 0.8rem; margin-top: 6px; display: none; }
+.field.invalid input, .field.invalid select, .field.invalid textarea { border-color: #d4503e; }
+.field.invalid .field-error { display: block; }
+.consent { display: flex; align-items: flex-start; gap: 10px; font-size: 0.84rem; color: var(--muted); margin: 4px 0 24px; }
+.consent input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); flex-shrink: 0; }
+.btn-submit { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent); color: #fff; border: none; border-radius: 11px; padding: 15px; font-family: inherit; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background 0.15s, transform 0.1s; box-shadow: 0 8px 22px rgba(14,124,102,0.28); }
+.btn-submit:hover { background: #0a6b58; transform: translateY(-1px); }
+.btn-submit:active { transform: translateY(0); }
+.form-note { text-align: center; font-size: 0.8rem; color: var(--muted); margin-top: 14px; }
+.form-success { display: none; text-align: center; padding: 20px 0 6px; }
+.form-success.show { display: block; }
+.success-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(14,124,102,0.12); color: var(--accent); display: grid; place-items: center; margin: 0 auto 14px; font-size: 1.6rem; }
+.form-success h3 { color: var(--navy); font-size: 1.2rem; }
+.form-success p { color: var(--muted); font-size: 0.92rem; margin-top: 6px; }
+
+/* INFO COLUMN */
+.info-stack { display: flex; flex-direction: column; gap: 18px; }
+.info-card { padding: 26px; }
+.info-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 18px; }
+.info-item { display: flex; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--line); text-decoration: none; transition: opacity 0.15s; }
+.info-item:last-child { border-bottom: none; padding-bottom: 0; }
+.info-item:first-of-type { padding-top: 0; }
+.info-item:hover { opacity: 0.78; }
+.info-ico { width: 42px; height: 42px; border-radius: 11px; background: rgba(14,124,102,0.1); color: var(--accent); display: grid; place-items: center; flex-shrink: 0; }
+.info-ico svg { width: 20px; height: 20px; }
+.info-label { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
+.info-value { font-size: 0.96rem; font-weight: 600; color: var(--ink); }
+.info-sub { font-size: 0.8rem; color: var(--muted); }
+
+.hours-card h3 { margin-bottom: 14px; }
+.hours-row { display: flex; justify-content: space-between; padding: 7px 0; font-size: 0.9rem; }
+.hours-row span:first-child { color: var(--muted); }
+.hours-row span:last-child { font-weight: 600; }
+.open-badge { display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; font-size: 0.82rem; font-weight: 600; color: var(--accent); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent2); box-shadow: 0 0 0 4px rgba(20,160,133,0.18); }
+
+/* SERVICES STRIP */
+.services { padding: 60px 0; }
+.section-head { text-align: center; max-width: 600px; margin: 0 auto 44px; }
+.section-head .tag { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+.section-head h2 { font-size: clamp(1.7rem, 4vw, 2.3rem); font-weight: 800; letter-spacing: -0.02em; color: var(--navy); margin: 8px 0 10px; }
+.section-head p { color: var(--muted); }
+.svc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.svc { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; transition: transform 0.15s, box-shadow 0.18s, border-color 0.15s; }
+.svc:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: rgba(14,124,102,0.35); }
+.svc-ico { font-size: 1.7rem; margin-bottom: 12px; }
+.svc h3 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.svc p { font-size: 0.88rem; color: var(--muted); }
+
+/* FAQ */
+.faq { padding: 30px 0 70px; }
+.faq-wrap { max-width: 760px; margin: 0 auto; }
+.faq-item { background: var(--white); border: 1px solid var(--line); border-radius: 12px; margin-bottom: 12px; overflow: hidden; }
+.faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; background: none; border: none; font-family: inherit; font-size: 1rem; font-weight: 600; color: var(--navy); text-align: left; cursor: pointer; }
+.faq-q .chev { transition: transform 0.2s; color: var(--accent); flex-shrink: 0; }
+.faq-item.open .chev { transform: rotate(180deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.25s ease; }
+.faq-a p { padding: 0 22px 20px; color: var(--muted); font-size: 0.93rem; }
+
+/* CTA BANNER */
+.cta { padding: 0 0 70px; }
+.cta-inner { background: linear-gradient(135deg, var(--navy), #0a2a4d); border-radius: 22px; padding: 56px 40px; text-align: center; color: #fff; position: relative; overflow: hidden; }
+.cta-inner::after { content: ""; position: absolute; inset: 0; background: radial-gradient(500px 220px at 80% 0%, rgba(20,160,133,0.3), transparent); }
+.cta-inner > * { position: relative; }
+.cta h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; letter-spacing: -0.02em; }
+.cta p { color: #c7d2e6; max-width: 480px; margin: 12px auto 28px; }
+.cta .btn-wa { font-size: 1rem; padding: 14px 28px; }
+
+/* FOOTER */
+footer { background: var(--navy); color: #c7d2e6; padding: 56px 0 30px; }
+.foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; padding-bottom: 36px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.foot-brand .logo { color: #fff; margin-bottom: 14px; }
+.foot-brand p { font-size: 0.9rem; max-width: 300px; color: #97a6c4; }
+.foot-col h4 { color: #fff; font-size: 0.95rem; margin-bottom: 14px; }
+.foot-col a { display: block; color: #97a6c4; text-decoration: none; font-size: 0.9rem; padding: 5px 0; transition: color 0.15s; }
+.foot-col a:hover { color: #fff; }
+.socials { display: flex; gap: 12px; margin-top: 18px; }
+.socials a { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,0.08); display: grid; place-items: center; color: #fff; transition: background 0.15s; }
+.socials a:hover { background: var(--accent); }
+.socials svg { width: 18px; height: 18px; }
+.foot-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; padding-top: 24px; font-size: 0.84rem; color: #7d8cab; }
+.foot-bottom a { color: #97a6c4; text-decoration: none; }
+
+/* FLOATING WA */
+.fab { position: fixed; right: 22px; bottom: 22px; z-index: 90; display: inline-flex; align-items: center; gap: 10px; background: #25d366; color: #fff; padding: 13px 20px; border-radius: 100px; font-weight: 700; font-size: 0.92rem; text-decoration: none; box-shadow: 0 12px 30px rgba(37,211,102,0.4); transition: transform 0.15s; }
+.fab:hover { transform: scale(1.04); }
+.fab svg { width: 22px; height: 22px; }
+
+@media (max-width: 880px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .foot-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .nav-links.open { display: flex; position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--white); border-bottom: 1px solid var(--line); padding: 12px 24px 20px; box-shadow: var(--shadow); }
+  .nav-links.open a { padding: 12px 0; width: 100%; border-bottom: 1px solid var(--line); }
+  .nav-links.open .btn-wa { justify-content: center; margin-top: 12px; border: none; }
+  .nav-toggle { display: block; }
+  .form-card, .info-card { padding: 26px 22px; }
+  .field-row { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr; }
+  .fab span { display: none; }
+  .fab { padding: 15px; }
+}
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="#" class="logo"><span class="logo-mark">§</span>paralegals<b>.id</b></a>
+      <div class="nav-links" id="navLinks">
+        <a href="#layanan">Layanan</a>
+        <a href="#proses">Proses</a>
+        <a href="#faq">FAQ</a>
+        <a href="#kontak" class="active">Kontak</a>
+        <a href="https://wa.me/6281234567890?text=Halo%20Paralegals.id%2C%20saya%20ingin%20konsultasi" class="btn-wa">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.207zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <header class="hero" id="kontak">
+    <div class="container hero-inner">
+      <span class="eyebrow">● Konsultasi Gratis</span>
+      <h1>Ada masalah hukum?<br /><span>Kami siap bantu.</span></h1>
+      <p>Tim paralegal & mitra advokat kami membantu pendirian usaha, kontrak, perizinan, dan pendampingan hukum — cepat, transparan, dan tanpa ribet. Ceritakan kebutuhanmu, kami balas hari ini juga.</p>
+      <div class="hero-quick">
+        <a href="https://wa.me/6281234567890?text=Halo%20Paralegals.id%2C%20saya%20ingin%20konsultasi" class="quick-chip">💬 Chat WhatsApp</a>
+        <a href="mailto:halo@paralegals.id" class="quick-chip">✉️ halo@paralegals.id</a>
+        <a href="tel:+6281234567890" class="quick-chip">📞 +62 812-3456-7890</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="contact-section">
+      <div class="container contact-grid">
+
+        <!-- FORM -->
+        <div class="card form-card">
+          <form id="contactForm" novalidate>
+            <h2>Kirim Pesan</h2>
+            <p>Isi formulir di bawah. Tim kami merespons dalam ±1 jam pada jam kerja.</p>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="nama">Nama Lengkap <span class="req">*</span></label>
+                <input type="text" id="nama" name="nama" placeholder="Nama kamu" required />
+                <div class="field-error">Mohon isi nama kamu.</div>
+              </div>
+              <div class="field">
+                <label for="telepon">No. WhatsApp <span class="req">*</span></label>
+                <input type="tel" id="telepon" name="telepon" placeholder="0812xxxxxxxx" required />
+                <div class="field-error">Masukkan nomor WhatsApp yang aktif.</div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="kamu@email.com" />
+              <div class="field-error">Format email tidak valid.</div>
+            </div>
+
+            <div class="field">
+              <label for="layanan">Layanan yang Dibutuhkan <span class="req">*</span></label>
+              <select id="layanan" name="layanan" required>
+                <option value="" disabled selected>Pilih layanan…</option>
+                <option>Pendirian PT / CV / Usaha</option>
+                <option>Pembuatan & Review Kontrak</option>
+                <option>Perizinan & Legalitas (NIB, dll)</option>
+                <option>Pendampingan & Konsultasi Hukum</option>
+                <option>HKI / Merek & Hak Cipta</option>
+                <option>Lainnya</option>
+              </select>
+              <div class="field-error">Pilih salah satu layanan.</div>
+            </div>
+
+            <div class="field">
+              <label for="pesan">Ceritakan Kebutuhanmu <span class="req">*</span></label>
+              <textarea id="pesan" name="pesan" placeholder="Contoh: Saya ingin mendirikan PT untuk usaha F&B di Jakarta…" required></textarea>
+              <div class="field-error">Mohon ceritakan kebutuhanmu.</div>
+            </div>
+
+            <label class="consent">
+              <input type="checkbox" id="consent" required />
+              <span>Saya setuju data saya digunakan untuk dihubungi kembali sesuai <a href="#" style="color:var(--accent);font-weight:600;">Kebijakan Privasi</a>.</span>
+            </label>
+
+            <button type="submit" class="btn-submit">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Kirim & Lanjut ke WhatsApp
+            </button>
+            <p class="form-note">Dengan mengirim, kamu akan diarahkan ke WhatsApp kami dengan pesan otomatis. Tanpa biaya.</p>
+          </form>
+
+          <div class="form-success" id="formSuccess">
+            <div class="success-icon">✓</div>
+            <h3>Pesan terkirim!</h3>
+            <p>Kami sedang membuka WhatsApp untukmu. Jika tidak otomatis terbuka, <a href="#" id="waFallback" style="color:var(--accent);font-weight:600;">klik di sini</a>.</p>
+          </div>
+        </div>
+
+        <!-- INFO -->
+        <div class="info-stack">
+          <div class="card info-card">
+            <h3>Cara Lain Menghubungi</h3>
+            <a class="info-item" href="https://wa.me/6281234567890?text=Halo%20Paralegals.id%2C%20saya%20ingin%20konsultasi">
+              <span class="info-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.207z"/></svg></span>
+              <span><span class="info-label">WhatsApp (tercepat)</span><br /><span class="info-value">+62 812-3456-7890</span></span>
+            </a>
+            <a class="info-item" href="mailto:halo@paralegals.id">
+              <span class="info-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></span>
+              <span><span class="info-label">Email</span><br /><span class="info-value">halo@paralegals.id</span></span>
+            </a>
+            <a class="info-item" href="https://instagram.com" target="_blank" rel="noopener">
+              <span class="info-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+              <span><span class="info-label">Instagram</span><br /><span class="info-value">@paralegals.id</span></span>
+            </a>
+            <div class="info-item">
+              <span class="info-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              <span><span class="info-label">Kantor</span><br /><span class="info-value">Jakarta Selatan</span><br /><span class="info-sub">Jl. Casablanca Raya No. 88, DKI Jakarta</span></span>
+            </div>
+          </div>
+
+          <div class="card info-card hours-card">
+            <h3>Jam Operasional</h3>
+            <div class="hours-row"><span>Senin – Jumat</span><span>09.00 – 18.00</span></div>
+            <div class="hours-row"><span>Sabtu</span><span>09.00 – 14.00</span></div>
+            <div class="hours-row"><span>Minggu & Libur</span><span>Tutup</span></div>
+            <div class="open-badge" id="openBadge"><span class="dot"></span> Mengecek status…</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="services" id="layanan">
+      <div class="container">
+        <div class="section-head">
+          <span class="tag">Layanan Kami</span>
+          <h2>Bantuan hukum untuk usaha & pribadi</h2>
+          <p>Dari mendirikan usaha sampai melindungi merekmu — semua dalam satu tim.</p>
+        </div>
+        <div class="svc-grid">
+          <div class="svc"><div class="svc-ico">🏢</div><h3>Pendirian Usaha</h3><p>PT, CV, hingga PT Perorangan. Lengkap dengan akta, NPWP, dan NIB.</p></div>
+          <div class="svc"><div class="svc-ico">📑</div><h3>Kontrak & Perjanjian</h3><p>Pembuatan dan review kontrak kerja, kerja sama, sewa, dan lainnya.</p></div>
+          <div class="svc"><div class="svc-ico">✅</div><h3>Perizinan & Legalitas</h3><p>Urus NIB, izin usaha, dan kepatuhan OSS tanpa pusing antre.</p></div>
+          <div class="svc"><div class="svc-ico">™️</div><h3>HKI & Merek</h3><p>Daftarkan merek, hak cipta, dan lindungi aset intelektualmu.</p></div>
+          <div class="svc"><div class="svc-ico">⚖️</div><h3>Konsultasi Hukum</h3><p>Pendampingan dan opini hukum dari paralegal & mitra advokat.</p></div>
+          <div class="svc"><div class="svc-ico">📨</div><h3>Somasi & Mediasi</h3><p>Penyusunan somasi dan bantuan penyelesaian sengketa secara damai.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="proses" style="padding-top:0;">
+      <div class="container">
+        <div class="section-head">
+          <span class="tag">Prosesnya Mudah</span>
+          <h2>Tiga langkah, beres.</h2>
+        </div>
+        <div class="svc-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
+          <div class="svc"><div class="svc-ico">①</div><h3>Hubungi Kami</h3><p>Isi formulir atau chat WhatsApp. Ceritakan kebutuhanmu.</p></div>
+          <div class="svc"><div class="svc-ico">②</div><h3>Konsultasi & Penawaran</h3><p>Kami berikan solusi, estimasi waktu, dan biaya yang transparan.</p></div>
+          <div class="svc"><div class="svc-ico">③</div><h3>Pengerjaan & Selesai</h3><p>Kami eksekusi sampai dokumen/legalitasmu tuntas di tangan.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <div class="container faq-wrap">
+        <div class="section-head">
+          <span class="tag">FAQ</span>
+          <h2>Pertanyaan yang sering ditanya</h2>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Apakah konsultasi awal benar-benar gratis? <span class="chev">▾</span></button>
+          <div class="faq-a"><p>Ya. Konsultasi awal untuk memahami kebutuhanmu sepenuhnya gratis dan tanpa kewajiban. Biaya hanya berlaku setelah kamu setuju dengan penawaran layanan.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Berapa lama proses pendirian PT? <span class="chev">▾</span></button>
+          <div class="faq-a"><p>Umumnya 5–10 hari kerja, tergantung kelengkapan dokumen dan jenis usaha. Kami akan memberi estimasi pasti saat penawaran.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Apakah bisa dilayani di luar Jakarta? <span class="chev">▾</span></button>
+          <div class="faq-a"><p>Bisa. Sebagian besar layanan kami dikerjakan secara online sehingga dapat menjangkau klien di seluruh Indonesia.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Bagaimana sistem pembayarannya? <span class="chev">▾</span></button>
+          <div class="faq-a"><p>Pembayaran dilakukan via transfer bank setelah penawaran disetujui. Untuk paket tertentu tersedia opsi pembayaran bertahap.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-inner">
+          <h2>Masih ragu? Tanya dulu aja.</h2>
+          <p>Tidak ada pertanyaan yang terlalu kecil. Chat tim kami sekarang dan dapatkan arahan langkah pertamamu.</p>
+          <a href="https://wa.me/6281234567890?text=Halo%20Paralegals.id%2C%20saya%20mau%20tanya-tanya%20dulu" class="btn-wa">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.207z"/></svg>
+            Chat WhatsApp Sekarang
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <a href="#" class="logo"><span class="logo-mark">§</span>paralegals.id</a>
+          <p>Solusi hukum digital untuk UMKM, startup, dan individu di Indonesia. Cepat, transparan, dan terjangkau.</p>
+          <div class="socials">
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+            <a href="https://wa.me/6281234567890" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24z"/></svg></a>
+            <a href="mailto:halo@paralegals.id" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></a>
+          </div>
+        </div>
+        <div class="foot-col">
+          <h4>Layanan</h4>
+          <a href="#layanan">Pendirian Usaha</a>
+          <a href="#layanan">Kontrak & Perjanjian</a>
+          <a href="#layanan">Perizinan & Legalitas</a>
+          <a href="#layanan">HKI & Merek</a>
+        </div>
+        <div class="foot-col">
+          <h4>Perusahaan</h4>
+          <a href="#proses">Cara Kerja</a>
+          <a href="#faq">FAQ</a>
+          <a href="#kontak">Kontak</a>
+          <a href="#">Kebijakan Privasi</a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Paralegals.id — Seluruh hak cipta dilindungi.</span>
+        <span>Dibuat dengan ❤️ di Jakarta</span>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/6281234567890?text=Halo%20Paralegals.id%2C%20saya%20ingin%20konsultasi" class="fab" aria-label="Chat WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.207z"/></svg>
+    <span>Chat Kami</span>
+  </a>
+
+  <script>
+    const WA_NUMBER = '6281234567890';
+
+    // Mobile nav
+    document.getElementById('navToggle').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+    document.querySelectorAll('#navLinks a').forEach(a =>
+      a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open')));
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const open = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-a').style.maxHeight = null;
+        });
+        if (!open) {
+          item.classList.add('open');
+          item.querySelector('.faq-a').style.maxHeight = item.querySelector('.faq-a').scrollHeight + 'px';
+        }
+      });
+    });
+
+    // Open/closed badge
+    (function () {
+      const badge = document.getElementById('openBadge');
+      const now = new Date();
+      const day = now.getDay(); // 0 Sun .. 6 Sat
+      const h = now.getHours();
+      let open = false;
+      if (day >= 1 && day <= 5) open = h >= 9 && h < 18;
+      else if (day === 6) open = h >= 9 && h < 14;
+      if (open) {
+        badge.innerHTML = '<span class="dot"></span> Buka sekarang — siap membalas';
+      } else {
+        badge.style.color = '#94a3b8';
+        badge.innerHTML = '<span class="dot" style="background:#94a3b8;box-shadow:0 0 0 4px rgba(148,163,184,0.18)"></span> Sedang tutup — pesan tetap masuk';
+      }
+    })();
+
+    // Form handling -> validate -> WhatsApp deep link
+    const form = document.getElementById('contactForm');
+    const success = document.getElementById('formSuccess');
+
+    function setInvalid(id, bad) {
+      document.getElementById(id).closest('.field').classList.toggle('invalid', bad);
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nama = document.getElementById('nama');
+      const telepon = document.getElementById('telepon');
+      const email = document.getElementById('email');
+      const layanan = document.getElementById('layanan');
+      const pesan = document.getElementById('pesan');
+      const consent = document.getElementById('consent');
+
+      let ok = true;
+      setInvalid('nama', !nama.value.trim()); ok = ok && !!nama.value.trim();
+      const phoneOk = telepon.value.replace(/\D/g, '').length >= 8;
+      setInvalid('telepon', !phoneOk); ok = ok && phoneOk;
+      const emailOk = !email.value.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+      setInvalid('email', !emailOk); ok = ok && emailOk;
+      setInvalid('layanan', !layanan.value); ok = ok && !!layanan.value;
+      setInvalid('pesan', !pesan.value.trim()); ok = ok && !!pesan.value.trim();
+      if (!consent.checked) { consent.focus(); ok = false; }
+
+      if (!ok) {
+        const firstBad = form.querySelector('.field.invalid');
+        if (firstBad) firstBad.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      const msg =
+        `Halo Paralegals.id! 👋%0A%0A` +
+        `*Nama:* ${encodeURIComponent(nama.value.trim())}%0A` +
+        `*WhatsApp:* ${encodeURIComponent(telepon.value.trim())}%0A` +
+        (email.value.trim() ? `*Email:* ${encodeURIComponent(email.value.trim())}%0A` : ``) +
+        `*Layanan:* ${encodeURIComponent(layanan.value)}%0A%0A` +
+        `*Kebutuhan:*%0A${encodeURIComponent(pesan.value.trim())}`;
+
+      const waUrl = `https://wa.me/${WA_NUMBER}?text=${msg}`;
+      document.getElementById('waFallback').setAttribute('href', waUrl);
+
+      form.style.display = 'none';
+      success.classList.add('show');
+      window.open(waUrl, '_blank');
+    });
+  </script>
+</body>
+</html>
